@@ -9,7 +9,7 @@ Based on this gist: https://gist.github.com/daniyalzade/8e32cd266aebd6d2ce35
 
 ## Commands
 
-`npm run start` to run the development server on http://localhost:3000
+`npm run start` to run the development server on [localhost:3000](localhost:3000)
 
 `npm run test` to run a watching tester on the files in `src/` and `test/`
 
