@@ -22,4 +22,11 @@
   font-size: large;
 }
 
+.Page-Explanation {
+  margin-top: 20px;
+}
+
+.Page-Keyword-Input-Container {
+  margin: 20px;
+  text-align: left;
 }
