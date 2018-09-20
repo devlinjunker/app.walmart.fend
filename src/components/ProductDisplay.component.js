@@ -7,13 +7,25 @@ export default class ProductDisplay extends Component {
     super(props);
 
     let message = 'No Products Found in IDs provided!'
-    if(this.props.products.length > 0) {
-      message = 'Found ' + this.props.products.length + ' Products!'
+    if(this.props.products.length > 1) {
+      message = this.props.products.length + ' Products Found!'
+    } else if(this.props.products.length == 1 ){
+      message = '1 Product Found!';
     }
 
     this.state = {
       message
     }
+
+    this.showProduct = this.showProduct.bind(this);
+  }
+
+  showProduct(e) {
+    e.preventDefault();
+
+    let id = e.target.getAttribute('data-product-id');
+
+    // TODO: Get Product Information and display in modal
   }
 
   render() {
@@ -23,7 +35,7 @@ export default class ProductDisplay extends Component {
         products.push(<Col xs="10" sm="4" className="Product-Id" key={this.props.products[i]}>
           <Card>
             <Card.Body>
-              <Card.Link href="">{this.props.products[i]}</Card.Link>
+              <Card.Link href="" onClick={this.showProduct} data-product-id={this.props.products[i]}>{this.props.products[i]}</Card.Link>
             </Card.Body>
           </Card>
         </Col>);
