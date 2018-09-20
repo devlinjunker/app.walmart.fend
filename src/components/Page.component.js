@@ -12,7 +12,7 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      keywords: '',
       productIds: undefined,
       loading: false,
       error: undefined
@@ -25,7 +25,7 @@ export default class Page extends Component {
   async requestProducts(e) {
     e.preventDefault();
 
-    let keywords = this.state.name;
+    let keywords = this.state.keywords;
     this.setState({ productIds: undefined, loading: true, error: undefined });
     try{
       const productIds = await WalmartDataservice.checkProducts(keywords);
@@ -61,7 +61,7 @@ export default class Page extends Component {
           <Form.Group as={Row}>
             <Col sm={{ span: 8, offset: 1 }} xs="7">
               <Form.Control type='text' className="Page-Keyword-Input" placeholder='Enter Keywords'
-                name="name" value={this.state.name} onChange={this.handleChange}/>
+                name="keywords" value={this.state.keywords} onChange={this.handleChange}/>
             </Col>
             <Col sm={{ span: 1, offset: 0 }} xs="3">
               <Button type="submit">Find Products</Button>
