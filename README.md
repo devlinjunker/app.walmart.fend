@@ -16,3 +16,8 @@ Requires node v8
 `npm run test` to run a watching tester on the files in `src/` and `test/`
 
 `npm run build` to create a production ready version of the application
+
+
+## Screenshots
+
+![test](https://user-images.githubusercontent.com/1504590/45796743-ea5d6a00-bc56-11e8-9ebe-2a2c075fbcc5.png)
