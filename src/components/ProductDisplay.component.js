@@ -25,6 +25,8 @@ export default class ProductDisplay extends Component {
 
     let id = e.target.getAttribute('data-product-id');
 
+    console.log('Clicked: ' + id);
+
     // TODO: Get Product Information and display in modal
   }
 

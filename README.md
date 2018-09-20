@@ -1,6 +1,6 @@
 # Walmart REST API Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+This project based on templates from [Create React App](https://github.com/facebookincubator/create-react-app) and also uses [React-Bootstrap](https://react-bootstrap.netlify.com/)
 
 Uses react to create a simple frontend for inputting keywords to be passed to the Walmart API. The Walmart API endpoint checks a set of product Ids to see if the keywords are in the product description. Products that match the keywords will be added to an array of Ids that are returned and displayed on the frontend.
 
