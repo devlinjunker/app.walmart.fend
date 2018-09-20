@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
 import _ from 'lodash';
+import React, { Component } from 'react';
+import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 
-import WalmartDataservice from "../dataservices/walmart.dataservice.js";
+import WalmartDataservice from '../dataservices/walmart.dataservice.js';
 
 import Spinner from './Spinner.component.js';
 import ProductDisplay from './ProductDisplay.component.js'
@@ -11,51 +12,74 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      productIds: [],
-      loading: false
+      name: '',
+      productIds: undefined,
+      loading: false,
+      error: undefined
     }
 
     this.requestProducts = this.requestProducts.bind(this);
-    this.makeRequest = _.debounce(this.makeRequest.bind(this), 600);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  requestProducts(e) {
-    let keywords = e.target.value;
-    this.setState({name: keywords});
-    this.makeRequest(keywords);
-  }
+  async requestProducts(e) {
+    e.preventDefault();
 
-  makeRequest(keywords) {
-    this.setState({ productIds: [], loading: true });
-    WalmartDataservice.checkProducts(keywords).then((productIds) => {
+    let keywords = this.state.name;
+    this.setState({ productIds: undefined, loading: true, error: undefined });
+    try{
+      const productIds = await WalmartDataservice.checkProducts(keywords);
+
       this.setState({ productIds, loading: false });
+    } catch (e) {
+        this.setState({ error: 'Server Error: Please Attempt Keyword Match Again', loading: false });
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
     });
   }
 
   render() {
-    let productDisplay;
+    let error;
+    if(this.state.error) {
+      error = <Alert variant="danger" dismissible>{this.state.error}</Alert>
+    }
 
+    let productDisplay;
     if (this.state.loading) {
       productDisplay = <Spinner/>;
-    } else if (this.state.productIds.length > 0) {
+    } else if (this.state.productIds) {
       productDisplay = <ProductDisplay products={this.state.productIds}/>;
-    } else {
-      productDisplay = <div></div>;
     }
 
     return (
-      <div>
-        <div className="Page-Explanation">
-          Walmart Item Challenge, check to see which products contain the keywords that you enter
-        </div>
+      <div className="Page">
+        <Form onSubmit={this.requestProducts}>
+          <Form.Group as={Row}>
+            <Col sm={{ span: 8, offset: 1 }} xs="7">
+              <Form.Control type='text' className="Page-Keyword-Input" placeholder='Enter Keywords'
+                name="name" value={this.state.name} onChange={this.handleChange}/>
+            </Col>
+            <Col sm={{ span: 1, offset: 0 }} xs="3">
+              <Button type="submit">Find Products</Button>
+            </Col>
+          </Form.Group>
+        </Form>
 
-        <div className="Page-Keyword-Input-Container">
-          <strong>Enter Keyword(s):</strong>
-          <input className="Page-Keyword-Input" value={this.state.name} onChange={this.requestProducts}/>
-        </div>
+        <Row>
+          <Col sm={{ span: 8, offset: 2 }}>
+            {error}
+          </Col>
+        </Row>
 
-        {productDisplay}
+        <Row>
+          <Col xs="12">
+            {productDisplay}
+          </Col>
+        </Row>
       </div>
     )
   }

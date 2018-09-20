@@ -1,32 +1,59 @@
+body > #root > div {
+  min-height: 100vh;
+  height: 100%;
+}
+
 .App {
-  text-align: center;
+  background-color: #78b9e7;
+  padding: 20px;
 }
 
 .App-logo {
   height: 60px;
-  float: left;
 }
 
-.App-header {
-  background-color: #78b9e7;
-  height: 60px;
-  padding: 10px;
+.App-Header {
   color: white;
+  width: 100%;
 }
 
 .App-title {
   font-size: 1.5em;
+  margin-top: 0px;
 }
 
-.App-intro {
-  font-size: large;
+.App-Explanation {
+  margin: 30px;
+  text-align: center;
 }
 
-.Page-Explanation {
-  margin-top: 20px;
+.Product-Display .jumbotron {
+  padding: 2rem 2rem 4rem 2rem;
 }
 
-.Page-Keyword-Input-Container {
-  margin: 20px;
-  text-align: left;
+.Product-Message {
+  font-weight: bold;
+}
+
+.Product-Id {
+  margin-top: 25px;
+  text-align: center;
+}
+
+
+.Spinner-Container {
+  text-align: center;
+}
+
+.Spinner-Image {
+  animation: Img-spin infinite 5s linear;
+  height: 50px;
+
+  margin: auto;
+  margin-top: 50px;
+}
+
+@keyframes Img-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

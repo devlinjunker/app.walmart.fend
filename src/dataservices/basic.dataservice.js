@@ -1,24 +1,40 @@
-var rp = require('request-promise');
+import rp from 'request-promise';
 
 export default class BasicDataservice {
 
   async get({ uri, params, headers }) {
-    let options = {
+    const options = {
       q: params,
       headers
     };
 
-    return await rp.get(uri, options);
+    let response = await rp.get(uri, options);
+
+    try {
+      response = JSON.parse(response);
+    } catch (e) {
+
+    }
+
+    return response;
   }
 
   async post({ uri, body, headers, form = true }) {
-    let options = {
+    const options = {
       body,
       headers,
       json: true
     };
 
-    return await rp.post(uri, options);
+    let response = await rp.post(uri, options);
+
+    try {
+      response = JSON.parse(response);
+    } catch (e) {
+
+    }
+
+    return response;
   }
 
 }
